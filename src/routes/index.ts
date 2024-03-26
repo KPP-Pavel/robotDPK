@@ -11,7 +11,7 @@ export const useRoutes = (app: Express) => {
             const requestData = extructData(req);
             isValid(requestData);
             const forecast = await getOpenWeatherMap(requestData);
-            //(32 °F − 32) × 5/9 = 0
+
             if (forecast) {
                 res.json(forecast);
                 return;
@@ -19,6 +19,8 @@ export const useRoutes = (app: Express) => {
 
             return res.status(404).send('no data');
         } catch (err) {
+            console.log('err', err);
+
             const error = err as Error;
             res.status(500).send(error.message);
         }
