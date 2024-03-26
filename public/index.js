@@ -1,47 +1,33 @@
-const getforecast = async (target) => {
+const tryApp = async (foo) => {
     const el = document.getElementById('result');
     el.innerHTML = '...загрузка';
     try {
-        const data = await fetch(`/api/forecast?city=Moscow`);
-        const res = await data.json();
-        el.innerHTML = `
-            <div>Дата:${res.date}</div>
-            <div>Прогноз:${res.weather}</div>
-        `;
+        await foo(el);
     } catch (err) {
+        console.log('err', err);
         el.innerHTML = 'Ошибка, нет данных';
     }
 };
 
-const getCurrentForecast = async () => {
-    const el = document.getElementById('result');
-    el.innerHTML = '...загрузка';
-    try {
+const getCurrentForecast = () => {
+    tryApp(async (el) => {
         const data = await fetch(`/api/forecast?city=Moscow`);
         const response = await data.json();
         const res = response.current;
         const HTML = extructHTML(res);
 
         el.innerHTML = HTML;
-    } catch (err) {
-        console.log('err', err);
-        el.innerHTML = 'Ошибка, нет данных';
-    }
+    });
 };
-const get8DaysForecast = async () => {
-    const el = document.getElementById('result');
-    el.innerHTML = '...загрузка';
-    try {
+const get8DaysForecast = () => {
+    tryApp(async (el) => {
         const data = await fetch(`/api/forecast?city=Moscow`);
         const response = await data.json();
         const res = response.daily;
         const HTML = res?.map((item) => extructHTML(item)).join('*******************');
 
         el.innerHTML = HTML;
-    } catch (err) {
-        console.log('err', err);
-        el.innerHTML = 'Ошибка, нет данных';
-    }
+    });
 };
 
 const getTemp = (res) => {
@@ -97,10 +83,8 @@ const getTime = (timeStamp) => {
     return `${hours}:${min}:${sec}`;
 };
 
-const printChart = async () => {
-    const el = document.getElementById('result');
-    el.innerHTML = '...загрузка';
-    try {
+const printChart = () => {
+    tryApp(async (el) => {
         const data = await fetch(`/api/forecast?city=Moscow`);
         const response = await data.json();
         const HTML = `<canvas id="myChart1"></canvas>
@@ -149,8 +133,5 @@ const printChart = async () => {
         new Chart(ctx2, getDataChart('Давление', dataChartPres));
         new Chart(ctx3, getDataChart('Облачность', dataChartClouds));
         new Chart(ctx4, getDataChart('Скорость ветра', dataChartWind));
-    } catch (err) {
-        console.log('err', err);
-        el.innerHTML = 'Ошибка, нет данных';
-    }
+    });
 };
