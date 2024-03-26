@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="index.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <title>Денис Кулешов</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js" defer></script>
-    <title>Денис Кулешов</title>
-</head>
-
-<body>
-    <div class="wrapper">
-        <h1 class="title">Робот Дениса Кулешова</h1>
-        <h3 class="subTitle">Показать погоду на:</h3>
-        <div class="buttonWrapper">
-            <button class="button-89" role="button" onclick="getforecast('yesterday')">Вчера</button>
-            <button class="button-89" role="button" onclick="getforecast('today')">Сегодня</button>
-            <button class="button-89" role="button" onclick="getforecast('tomorrow')">Завтра</button>
+    <body>
+        <div class="wrapper">
+            <h1 class="title">Робот Дениса Кулешова</h1>
+            <div class="buttonWrapper">
+                <button class="button-89" role="button" onclick="getCurrentForecast()">
+                    Сегодня
+                </button>
+                <button class="button-89" role="button" onclick="get8DaysForecast()">
+                    8 Дней
+                </button>
+                <button class="button-89" role="button" onclick="printChart()">
+                    График
+                </button>
+            </div>
+            <div id="result"></div>
         </div>
-        <div id="result"></div>
-    </div>
-</body>
-
+    </body>
 </html>
