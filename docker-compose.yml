@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  nodejs:
+    image: node:21-alpine3.18
+    container_name: nodejs
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dist:/dist
+    command: node dist/main.js
