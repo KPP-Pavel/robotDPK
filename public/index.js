@@ -8,10 +8,15 @@ const tryApp = async (foo) => {
         el.innerHTML = 'Ошибка, нет данных';
     }
 };
+const fetchData = async () => {
+    return await fetch(
+        `https://openweathermap.org/data/2.5/onecall?lat=55.7522&lon=37.6156&units=metric&appid=439d4b804bc8187953eb36d2a8c26a02`,
+    );
+};
 
 const getCurrentForecast = () => {
     tryApp(async (el) => {
-        const data = await fetch(`/api/forecast?city=Moscow`);
+        const data = await fetchData();
         const response = await data.json();
         const res = response.current;
         const HTML = extructHTML(res);
@@ -21,7 +26,7 @@ const getCurrentForecast = () => {
 };
 const get8DaysForecast = () => {
     tryApp(async (el) => {
-        const data = await fetch(`/api/forecast?city=Moscow`);
+        const data = await fetchData();
         const response = await data.json();
         const res = response.daily;
         const HTML = res?.map((item) => extructHTML(item)).join('*******************');
@@ -85,7 +90,7 @@ const getTime = (timeStamp) => {
 
 const printChart = () => {
     tryApp(async (el) => {
-        const data = await fetch(`/api/forecast?city=Moscow`);
+        const data = await fetchData();
         const response = await data.json();
         const HTML = `<canvas id="myChart1"></canvas>
         <canvas id="myChart2"></canvas>
