@@ -1,12 +1,22 @@
 version: '3'
 
 services:
-  nodejs:
+  rootapp:
     image: node:21-alpine3.18
-    container_name: nodejs
+    container_name: rootapp
     restart: unless-stopped
     ports:
       - "3000:3000"
     volumes:
       - ./dist:/dist
     command: node dist/main.js
+  nginx:
+    image: nginx
+    restart: always
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/certs:/etc/nginx/certs
+      - ./nginx/conf.d:/etc/nginx/conf.d
